@@ -9,10 +9,13 @@ Gem::Specification.new do |spec|
   spec.authors       = ["unagiootoro"]
   spec.email         = ["ootoro838861@outlook.jp"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Ruby reinforcement learning library.}
+  spec.description   = %q{ruby-rl is a ruby reinforcement learning library.}
+  spec.homepage      = "https://github.com/unagiootoro/ruby-rl.git"
   spec.license       = "MIT"
+
+  spec.add_dependency "numo-narray"
+  spec.add_dependency "ruby-dnn"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
