@@ -67,6 +67,7 @@ module RL
     def run(max_steps: 200)
       call_callbacks(:before_run)
       observation = nil
+      logging = true
       max_steps.times do |step|
         call_callbacks(:before_running)
         action = if step == 0
@@ -76,12 +77,15 @@ module RL
           result.max_index
         end
         observation, reward, done, info = *@env.step(action)
-        @last_log[:step] = step
-        @last_log[:observation] = observation
-        @last_log[:action] = action
-        @last_log[:reward] = reward
+        if logging
+          @last_log[:step] = step
+          @last_log[:observation] = observation
+          @last_log[:action] = action
+          @last_log[:reward] = reward
+          call_callbacks(:after_running)
+        end
+        logging = false if done
         @env.render
-        call_callbacks(:after_running)
       end
       call_callbacks(:after_run)
     end
