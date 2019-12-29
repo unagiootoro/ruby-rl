@@ -4,6 +4,14 @@ module RL
     attr_accessor :gamma
     attr_reader :last_log
 
+    # @param [DNN::Models::Model] model Model used for training.
+    # @param [RL::Env] env Training environment.
+    # @param [Integer] max_memory_size Max size of memory for storing actions.
+    # @param [Integer | NilClass] train_memory_size Memory size where training can start.
+    #                                               Setting nil sets batch_size to train_memory_size.
+    # @param [Integer] batch_size Batch size used for one training.
+    # @param [Float] gamma Discount rate of reward.
+    # @param [RL::Policies::Policy] policy The policy to use for training.
     def initialize(model, env,
                    max_memory_size: 1024,
                    train_memory_size: nil,
@@ -32,6 +40,8 @@ module RL
     # def pre_epispde; end
     # def post_episode; end
 
+    # Start training.
+    # @param [Integer] epochs Number of training.
     def train(epochs)
       (1..epochs).each do |episode|
         puts "episode: #{episode}"
@@ -64,6 +74,8 @@ module RL
       end
     end
 
+    # Render the environment based on the learning results.
+    # @param [Integer] max_steps Max rendering times.
     def run(max_steps: 200)
       call_callbacks(:before_run)
       observation = nil
@@ -90,6 +102,8 @@ module RL
       call_callbacks(:after_run)
     end
 
+    # Add callback function.
+    # @param [RL::Callback] callback Callback object.
     def add_callback(callback)
       callback.model = @model
       callback.agent = self
@@ -97,6 +111,7 @@ module RL
       @callbacks << callback
     end
 
+    # Clear the callback function registered.
     def clear_callbacks
       @callbacks = []
     end

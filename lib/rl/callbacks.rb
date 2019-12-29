@@ -7,6 +7,7 @@ module RL
       attr_accessor :agent
     end
 
+    # This callback wrap the lambda function.
     class LambdaCallback < Callback
       def initialize(event, lambda = nil, &block)
         lambda = block if block
