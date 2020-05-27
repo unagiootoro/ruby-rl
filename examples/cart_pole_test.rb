@@ -10,5 +10,6 @@ model = DQN.load("trained_cart_pole.marshal")
 
 agent = RL::DQNAgent.new(model, env)
 agent.add_callback(LambdaCallback.new(:after_run) { puts "last step = #{agent.last_log[:step]}" })
+agent.add_callback(LambdaCallback.new(:after_running) { sleep 1.0 / 60 })
 
 agent.run

@@ -6,7 +6,7 @@ include DNN::Losses
 class DQN < Model
   def self.create(state_size, action_size)
     model = self.new(state_size, action_size)
-    model.setup(RMSPropGraves.new, HuberLoss.new)
+    model.setup(RMSPropGraves.new(lr: 0.01), HuberLoss.new)
     model
   end
 
